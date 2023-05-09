@@ -76,6 +76,7 @@ In Visual Studio Code, navigate to `Preferences` -> `Settings` and search for `F
 * Dark Theme Support (new)
 * Multilingual Support (new)
 * Provider example (new)
+* Sizer for Responsive UI
 
 ### Up-Coming Features:
 
