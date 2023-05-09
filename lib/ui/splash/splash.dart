@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:boilerplate/constants/assets.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
+import 'package:boilerplate/ui/month_view_calender.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
 import 'package:flutter/material.dart';
@@ -41,9 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
     if (preferences.getBool(Preferences.is_logged_in) ?? false) {
-      Navigator.of(context).pushReplacementNamed(Routes.login);
+      Navigator.of(context).pushReplacementNamed(Routes.calender);
     } else {
-      Navigator.of(context).pushReplacementNamed(Routes.login);
+      Navigator.of(context).pushReplacementNamed(Routes.calender);
     }
   }
 }

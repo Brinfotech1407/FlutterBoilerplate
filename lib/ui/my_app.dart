@@ -6,6 +6,7 @@ import 'package:boilerplate/stores/language/language_store.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
 import 'package:boilerplate/stores/theme/theme_store.dart';
 import 'package:boilerplate/stores/user/user_store.dart';
+import 'package:boilerplate/ui/month_view_calender.dart';
 import 'package:boilerplate/ui/splash/splash.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
                     ? AppThemeData.darkThemeData
                     : AppThemeData.lightThemeData,
                 routes: Routes.routes,
-                locale: Locale('ko'),
+                locale: Locale('en'),
                 supportedLocales: [
                   const Locale('ko'),
                   const Locale('hi'),
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
                   // Built-in localization of basic text for Cupertino widgets
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                home: SafeArea(child: SplashScreen()),
+                home: SafeArea(child: MonthViewCalender()),
               );
             },
           );

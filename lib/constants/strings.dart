@@ -2,5 +2,5 @@ class Strings {
   Strings._();
 
   //General
-  static const String appName = "PoolApp";
+  static const String appName = "Boilerplate";
 }
