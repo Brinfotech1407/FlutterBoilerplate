@@ -78,6 +78,11 @@ dependencies:
   expandable_bottom_sheet: ^1.1.1+1
   sizer: ^2.0.15
 
+  ##Used for logging utils
+  logger: ^1.3.0
+  package_info: ^2.0.2
+  permission_handler: ^9.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
