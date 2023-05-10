@@ -4,6 +4,7 @@ import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/utils/device/device_utils.dart';
 import 'package:boilerplate/utils/logging/app_logger.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
+import 'package:boilerplate/widgets/custom_check_box.dart';
 import 'package:boilerplate/widgets/rounded_button_widget.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isCheckedValue = false;
+
   @override
   void initState() {
     ApplicationLogger.init();
@@ -54,6 +57,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
               SizedBox(height: 20),
+              CustomCheckbox(
+                isChecked: isCheckedValue,
+                onChange: (value) {
+                  isCheckedValue = value;
+                  setState(() {});
+                },
+                size: 25,
+                iconSize: 20,
+                selectedColor: Colors.blue,
+                selectedIconColor: Colors.white,
+                borderColor: Colors.black45,
+                checkIcon: Icon(Icons.check),
+              ),
               bottomTextView(),
             ],
           ),
