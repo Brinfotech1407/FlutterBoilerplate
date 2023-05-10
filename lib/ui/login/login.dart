@@ -169,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
       margin: EdgeInsets.only(right: 6, left: 6),
       child: Container(
         height: 1.5,
-        width: DeviceUtils.getDeviceWidth(context) / 3.5,
+        width: DeviceUtils.getDeviceWidth(context) / 4,
         color: Color(0xffECF0F3),
       ),
     );

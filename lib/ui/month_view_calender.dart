@@ -26,7 +26,7 @@ class _MonthViewCalenderState extends State<MonthViewCalender> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      margin: EdgeInsets.only(top: 6.h),
+    //  margin: EdgeInsets.only(top: 6.h),
       height: DeviceUtils.getDeviceHeight(context) / 2,
       child: ValueListenableBuilder<CalendarSelectionDetails>(
         valueListenable: calendarSelectionDetails,

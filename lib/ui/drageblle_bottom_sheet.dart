@@ -1,5 +1,6 @@
 import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/constants/text_style.dart';
+import 'package:boilerplate/ui/month_view_calender.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -49,15 +50,23 @@ class MyWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.w),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.w),
                     child: Row(
                       children: [
-                        Text('HEADER', style: Styles.subHeadSemiBoldTextStyle()),
+                        Text('HEADER',
+                            style: Styles.subHeadSemiBoldTextStyle()),
                         Spacer(),
                         IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            }, icon: Icon(Icons.close,size: 22.sp,color: AppColors.darkGrayColor,),),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            size: 22.sp,
+                            color: AppColors.darkGrayColor,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -66,17 +75,18 @@ class MyWidget extends StatelessWidget {
                       shrinkWrap: true,
                       controller: scrollController,
                       children:
-                          List<Text>.generate(count, (x) => Text("CHILD")),
+                          List<Text>.generate(count, (x) => Text("List of the bottom-sheet $x")),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 1.h),
-                      elevation: 8.sp,  // Elevation
-                      shadowColor: Colors.amber, // Shadow Color
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.w, vertical: 1.h),
+                      elevation: 8.sp, // Elevation
+
                     ),
-                    child:  Text(
+                    child: Text(
                       'Button',
                       style: TextStyle(fontSize: 17.sp),
                     ),
