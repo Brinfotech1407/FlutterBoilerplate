@@ -63,12 +63,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   isCheckedValue = value;
                   setState(() {});
                 },
-                size: 25,
-                iconSize: 20,
-                selectedColor: Colors.blue,
-                selectedIconColor: Colors.white,
-                borderColor: Colors.black45,
-                checkIcon: Icon(Icons.check),
               ),
               bottomTextView(),
             ],
