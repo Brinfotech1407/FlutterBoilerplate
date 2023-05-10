@@ -1,6 +1,8 @@
 import 'package:boilerplate/constants/colors.dart';
+import 'package:boilerplate/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sizer/sizer.dart';
 
 class AppUtils {
   static void showToast({required String msg}) {
@@ -95,5 +97,96 @@ class AppUtils {
       },
     );
     return result ?? false;
+  }
+
+  static void showCustomBottomSheet({
+    required BuildContext context,
+    Widget? bottomSheetHeader,
+    Widget? bottomSheetContent,
+    Widget? bottomSheetFooter,
+    String? bottomButtonTitle,
+    String? headerTitle,
+  }) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      enableDrag: true,
+      useSafeArea: true,
+      context: context,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h))),
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: .5,
+          maxChildSize: 1,
+          minChildSize: 0.40,
+          builder: (context, scrollController) {
+            return Container(
+              padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  bottomSheetHeader ??
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 1.h, horizontal: 1.w),
+                        child: Row(
+                          children: [
+                            Text(headerTitle ?? 'HEADER',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                                style: Styles.body2SemiBoldTextStyle()),
+                            Spacer(),
+                            IconButton(
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                size: 22.sp,
+                                color: AppColors.darkGrayColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                  Flexible(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Container(
+                        child: bottomSheetContent ??
+                            ListView(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              children: List<Text>.generate(50,
+                                  (x) => Text("List of the bottom-sheet $x")),
+                            ),
+                      ),
+                    ),
+                  ),
+                  bottomSheetFooter ??
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.w, vertical: 1.h),
+                          elevation: 8.sp, // Elevation
+                        ),
+                        child: Text(
+                          bottomButtonTitle ?? 'Button',
+                          style: TextStyle(fontSize: 17.sp),
+                        ),
+                      )
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

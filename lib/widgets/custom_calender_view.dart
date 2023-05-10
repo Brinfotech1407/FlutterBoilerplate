@@ -8,7 +8,7 @@ class CustomCalenderView extends StatefulWidget {
   final CalendarHeaderStyle? calendarHeaderStyle;
   final Decoration? selectionDecoration;
   final String? headerDateFormat;
-  final Widget? selectedDateWidget;
+  final Widget? selectedCellWidget;
   final Widget? normalDateWidget;
   final double? height;
 
@@ -17,7 +17,7 @@ class CustomCalenderView extends StatefulWidget {
     this.calendarHeaderStyle,
     this.selectionDecoration,
     this.headerDateFormat,
-    this.selectedDateWidget,
+    this.selectedCellWidget,
     this.normalDateWidget,
     this.height,
     Key? key,
@@ -84,7 +84,7 @@ class _CustomCalenderViewState extends State<CustomCalenderView> {
         calendarSelectionDetails.value.date!.month == details.date.month &&
         calendarSelectionDetails.value.date!.day == details.date.day;
     if (isSelected) {
-      return widget.selectedDateWidget ??
+      return widget.selectedCellWidget ??
           Container(
             padding: EdgeInsets.all(6),
             decoration: BoxDecoration(
