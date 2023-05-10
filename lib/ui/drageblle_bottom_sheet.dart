@@ -1,4 +1,7 @@
+import 'package:boilerplate/constants/colors.dart';
+import 'package:boilerplate/constants/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class DraggableBottomSheet extends StatefulWidget {
   const DraggableBottomSheet({Key? key}) : super(key: key);
@@ -10,7 +13,7 @@ class DraggableBottomSheet extends StatefulWidget {
 class _DraggableBottomSheetState extends State<DraggableBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: MyWidget(),
     );
   }
@@ -45,15 +48,39 @@ class MyWidget extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text('HEADER'),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 1.h,horizontal: 1.w),
+                    child: Row(
+                      children: [
+                        Text('HEADER', style: Styles.subHeadSemiBoldTextStyle()),
+                        Spacer(),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }, icon: Icon(Icons.close,size: 22.sp,color: AppColors.darkGrayColor,),),
+                      ],
+                    ),
+                  ),
                   Flexible(
                     child: ListView(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: List<Text>.generate(count, (x) => Text("CHILD")),
+                      controller: scrollController,
+                      children:
+                          List<Text>.generate(count, (x) => Text("CHILD")),
                     ),
                   ),
-                  Text('FOOTER'),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 1.h),
+                      elevation: 8.sp,  // Elevation
+                      shadowColor: Colors.amber, // Shadow Color
+                    ),
+                    child:  Text(
+                      'Button',
+                      style: TextStyle(fontSize: 17.sp),
+                    ),
+                  )
                 ],
               ),
             );
