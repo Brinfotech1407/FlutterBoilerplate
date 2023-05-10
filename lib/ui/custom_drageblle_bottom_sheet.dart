@@ -74,6 +74,9 @@ class _MyWidgetState extends State<MyWidget> {
       enableDrag: true,
       useSafeArea: true,
       context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h),topRight: Radius.circular(3.h))
+      ),
       builder: (BuildContext context) {
         return DraggableScrollableSheet(
           expand: false,
@@ -86,7 +89,7 @@ class _MyWidgetState extends State<MyWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  widget.bottomSheetContent ??
+                  widget.bottomSheetHeader ??
                       Container(
                         padding: EdgeInsets.symmetric(
                             vertical: 1.h, horizontal: 1.w),
@@ -113,15 +116,20 @@ class _MyWidgetState extends State<MyWidget> {
                           ],
                         ),
                       ),
-                  widget.bottomSheetContent ??
-                      Flexible(
-                        child: ListView(
-                          shrinkWrap: true,
-                          controller: scrollController,
-                          children: List<Text>.generate(count,
-                              (x) => Text("List of the bottom-sheet $x")),
-                        ),
+                  Flexible(
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Container(
+                        child: widget.bottomSheetContent ??
+                            ListView(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              children: List<Text>.generate(count,
+                                  (x) => Text("List of the bottom-sheet $x")),
+                            ),
                       ),
+                    ),
+                  ),
                   widget.bottomSheetFooter ??
                       ElevatedButton(
                         onPressed: () {},

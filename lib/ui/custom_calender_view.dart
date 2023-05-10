@@ -40,9 +40,8 @@ class _CustomCalenderViewState extends State<CustomCalenderView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      margin: EdgeInsets.only(top: 6.h),
+    return Container(
+      //margin: EdgeInsets.only(top: 6.h),
       height: widget.height ?? 90.h,
       child: ValueListenableBuilder<CalendarSelectionDetails>(
         valueListenable: calendarSelectionDetails,
@@ -53,14 +52,14 @@ class _CustomCalenderViewState extends State<CustomCalenderView> {
             initialSelectedDate: DateTime.now(),
             cellBorderColor: Colors.grey.shade200,
             headerStyle:
-                widget.calendarHeaderStyle ?? buildCalendarHeaderStyle(),
+            widget.calendarHeaderStyle ?? buildCalendarHeaderStyle(),
             viewHeaderStyle: buildViewHeaderStyle(),
             onSelectionChanged: (calendarSelectionDetails) {
               WidgetsBinding.instance.addPostFrameCallback((_) => this
                   .calendarSelectionDetails
                   .value = calendarSelectionDetails);
             },
-            /** below changes the selected date border color change**/
+            /** below changes the selected date border change**/
             selectionDecoration: BoxDecoration(
               border: Border.all(color: Colors.deepPurple, width: 2),
               shape: BoxShape.circle,
@@ -69,14 +68,14 @@ class _CustomCalenderViewState extends State<CustomCalenderView> {
             headerDateFormat: widget.headerDateFormat ?? 'yyyy. MM',
             cellEndPadding: 4,
             monthViewSettings:
-                MonthViewSettings(monthCellStyle: buildMonthCellStyle()),
+            MonthViewSettings(monthCellStyle: buildMonthCellStyle()),
             showCurrentTimeIndicator: true,
-            /**monthCell builder change the Selected date UI*/
+            /**monthCell builder change the Selected/all  date UI*/
             monthCellBuilder: monthCellBuilder,
           );
         },
       ),
-    ));
+    );
   }
 
   Widget monthCellBuilder(BuildContext context, MonthCellDetails details) {
