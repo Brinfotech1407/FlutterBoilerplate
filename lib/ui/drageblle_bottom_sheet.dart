@@ -1,6 +1,6 @@
 import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/constants/text_style.dart';
-import 'package:boilerplate/ui/month_view_calender.dart';
+import 'package:boilerplate/ui/custom_calender_view.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 

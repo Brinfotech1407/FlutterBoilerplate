@@ -1,17 +1,33 @@
 import 'package:boilerplate/constants/colors.dart';
-import 'package:boilerplate/utils/device/device_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class MonthViewCalender extends StatefulWidget {
-  const MonthViewCalender({Key? key}) : super(key: key);
+class CustomCalenderView extends StatefulWidget {
+  final CalendarView? calendarView;
+  final CalendarHeaderStyle? calendarHeaderStyle;
+  final Decoration? selectionDecoration;
+  final String? headerDateFormat;
+  final Widget? selectedDateWidget;
+  final Widget? normalDateWidget;
+  final double? height;
+
+  CustomCalenderView({
+    this.calendarView,
+    this.calendarHeaderStyle,
+    this.selectionDecoration,
+    this.headerDateFormat,
+    this.selectedDateWidget,
+    this.normalDateWidget,
+    this.height,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<MonthViewCalender> createState() => _MonthViewCalenderState();
+  State<CustomCalenderView> createState() => _CustomCalenderViewState();
 }
 
-class _MonthViewCalenderState extends State<MonthViewCalender> {
+class _CustomCalenderViewState extends State<CustomCalenderView> {
   CalendarController controller = CalendarController();
   ValueNotifier<CalendarSelectionDetails> calendarSelectionDetails =
       ValueNotifier<CalendarSelectionDetails>(
@@ -26,36 +42,37 @@ class _MonthViewCalenderState extends State<MonthViewCalender> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-    //  margin: EdgeInsets.only(top: 6.h),
-      height: DeviceUtils.getDeviceHeight(context) / 2,
+      margin: EdgeInsets.only(top: 6.h),
+      height: widget.height ?? 90.h,
       child: ValueListenableBuilder<CalendarSelectionDetails>(
         valueListenable: calendarSelectionDetails,
         builder: (context, value, child) {
           return SfCalendar(
             controller: controller,
-            view: CalendarView.month,
+            view: widget.calendarView ?? CalendarView.month,
             initialSelectedDate: DateTime.now(),
             cellBorderColor: Colors.grey.shade200,
-            headerStyle: buildCalendarHeaderStyle(),
+            headerStyle:
+                widget.calendarHeaderStyle ?? buildCalendarHeaderStyle(),
             viewHeaderStyle: buildViewHeaderStyle(),
             onSelectionChanged: (calendarSelectionDetails) {
               WidgetsBinding.instance.addPostFrameCallback((_) => this
                   .calendarSelectionDetails
                   .value = calendarSelectionDetails);
             },
-           /** below changes the selected date border color change**/
+            /** below changes the selected date border color change**/
             selectionDecoration: BoxDecoration(
               border: Border.all(color: Colors.deepPurple, width: 2),
               shape: BoxShape.circle,
               color: Colors.transparent,
             ),
-            headerDateFormat: 'yyyy. MM',
+            headerDateFormat: widget.headerDateFormat ?? 'yyyy. MM',
             cellEndPadding: 4,
             monthViewSettings:
                 MonthViewSettings(monthCellStyle: buildMonthCellStyle()),
             showCurrentTimeIndicator: true,
             /**monthCell builder change the Selected date UI*/
-            monthCellBuilder:monthCellBuilder,
+            monthCellBuilder: monthCellBuilder,
           );
         },
       ),
@@ -68,21 +85,26 @@ class _MonthViewCalenderState extends State<MonthViewCalender> {
         calendarSelectionDetails.value.date!.month == details.date.month &&
         calendarSelectionDetails.value.date!.day == details.date.day;
     if (isSelected) {
-      return Container(
-          padding: EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: Colors.purpleAccent,
-            shape: BoxShape.circle,
-          ),
-          child: Center(child: Text(details.date.day.toString())));
+      return widget.selectedDateWidget ??
+          Container(
+            padding: EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: Colors.purpleAccent,
+              shape: BoxShape.circle,
+            ),
+            child: Center(child: Text(details.date.day.toString())),
+          );
     } else {
-      return Center(
-        child: Text(details.date.day.toString(),
-            style: TextStyle(
-                color: details.date.month == controller.selectedDate?.month
-                    ? Colors.black
-                    : Colors.grey)),
-      );
+      return widget.normalDateWidget ??
+          Center(
+            child: Text(
+              details.date.day.toString(),
+              style: TextStyle(
+                  color: details.date.month == controller.selectedDate?.month
+                      ? Colors.black
+                      : Colors.grey),
+            ),
+          );
     }
   }
 
