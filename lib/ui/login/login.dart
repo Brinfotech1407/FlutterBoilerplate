@@ -2,8 +2,9 @@ import 'package:boilerplate/constants/assets.dart';
 import 'package:boilerplate/constants/text_style.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/utils/device/device_utils.dart';
-import 'package:boilerplate/utils/routes/routes.dart';
+import 'package:boilerplate/utils/logging/app_logger.dart';
 import 'package:boilerplate/widgets/app_icon_widget.dart';
+import 'package:boilerplate/widgets/custom_check_box.dart';
 import 'package:boilerplate/widgets/rounded_button_widget.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,8 +15,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isCheckedValue = false;
+
   @override
   void initState() {
+    ApplicationLogger.init();
     super.initState();
   }
 
@@ -41,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               buildBottomButtonView(
                 title: "이메일로 로그인",
                 onLoginWithEmailButtonPressed: () {
-
+                  log.i('LoginWith Email Button Pressed');
                 },
               ),
               SizedBox(height: 16),
@@ -49,10 +53,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: "회원가입",
                 isMembershipButton: true,
                 onMemberShipButtonPressed: () {
-
+                  log.i('Signup Button Pressed');
                 },
               ),
               SizedBox(height: 20),
+              CustomCheckbox(
+                isChecked: isCheckedValue,
+                onChange: (value) {
+                  isCheckedValue = value;
+                  setState(() {});
+                },
+              ),
               bottomTextView(),
             ],
           ),
@@ -68,9 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         GestureDetector(
           child: findIdPwdText(text: '아이디찾기'),
-          onTap: () {
-
-          },
+          onTap: () {},
         ),
         Neumorphic(
           margin: EdgeInsets.only(right: 6, left: 6),
@@ -82,9 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         GestureDetector(
           child: findIdPwdText(text: '비밀번호 찾기'),
-          onTap: () {
-
-          },
+          onTap: () {},
         ),
       ],
     );
@@ -245,9 +252,7 @@ class _LoginScreenState extends State<LoginScreen> {
       prefs.setBool(Preferences.is_logged_in, true);
     });
 
-    Future.delayed(Duration(milliseconds: 0), () {
-
-    });
+    Future.delayed(Duration(milliseconds: 0), () {});
 
     return Container();
   }
