@@ -9,6 +9,8 @@ class CustomCheckbox extends StatefulWidget {
   final Color? selectedIconColor;
   final Color? borderColor;
   final Icon? checkIcon;
+  final Widget? checkedWidget;
+  final Widget? unCheckedWidget;
 
   CustomCheckbox({
     required this.isChecked,
@@ -18,7 +20,9 @@ class CustomCheckbox extends StatefulWidget {
     this.selectedColor,
     this.selectedIconColor,
     this.borderColor,
+    this.checkedWidget,
     this.checkIcon,
+    this.unCheckedWidget,
   });
 
   @override
@@ -59,13 +63,13 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
         width: widget.size ?? 18,
         height: widget.size ?? 18,
         child: _isSelected
-            ? widget.checkIcon ??
+            ? widget.checkedWidget ??
                 Icon(
                   Icons.check,
                   color: widget.selectedIconColor ?? Colors.white,
                   size: widget.iconSize ?? 14,
                 )
-            : null,
+            : widget.unCheckedWidget ?? null,
       ),
     );
   }
